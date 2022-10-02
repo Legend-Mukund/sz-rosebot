@@ -93,10 +93,10 @@ async def broadcast_message(_, message):
             if message.command[0] == "bcast":
                 await message.reply_to_message.copy(int(chat['bot_users']))
             success +=1
-        except errors.InputUserDeactivated:
+        except InputUserDeactivated:
             deactivated +=1
             await remove_served_user(int(chat['bot_users']))
-        except errors.UserIsBlocked:
+        except UserIsBlocked:
             blocked +=1
         except Exception as e:
             print(e)
@@ -118,14 +118,13 @@ async def broadcast_message(_, message):
             if message.command[0] == "gcast":
                 await message.reply_to_message.copy(int(chat['chat_id']))
             success +=1
-        except errors.InputUserDeactivated:
+        except InputUserDeactivated:
             deactivated +=1
             await remove_served_user(int(chat['chat_id']))
-        except errors.UserIsBlocked:
+        except UserIsBlocked:
             blocked +=1
         except Exception as e:
             print(e)
             failed +=1
 
         await lel.edit(f"✅Successfully Broadcast to `{success}` users.\n❌Faild to Broadcast `{failed}` users.\nFound `{blocked}` Blocked users and `{deactivated}` Deactivated users.")
-
